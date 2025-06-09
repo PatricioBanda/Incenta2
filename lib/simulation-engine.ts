@@ -1,14 +1,31 @@
 import { v4 as uuidv4 } from "uuid"
-import type { Scenario, SimulationResult, TimeSeriesPoint } from "./types"
+import type {
+  Scenario,
+  SimulationResult,
+  TimeSeriesPoint,
+  SimulationParameters,
+} from "./types"
+
+export const DEFAULT_PARAMETERS: SimulationParameters = {
+  population: { value: 1000 },
+  growthRate: { value: 0.02 },
+  volatility: { value: 0.1 },
+  enableRandomEvents: { value: true },
+  iterations: { value: 50 },
+}
 
 // Simulates population growth based on scenario parameters
-export async function runSimulation(scenario: Scenario): Promise<SimulationResult> {
+export async function runSimulation(
+  scenario: Scenario,
+): Promise<SimulationResult> {
+  const params = scenario.parameters ?? DEFAULT_PARAMETERS
+
   // Extract parameters
-  const initialPopulation = scenario.parameters.population.value as number
-  const growthRate = scenario.parameters.growthRate.value as number
-  const volatility = scenario.parameters.volatility.value as number
-  const enableRandomEvents = scenario.parameters.enableRandomEvents.value as boolean
-  const iterations = scenario.parameters.iterations.value as number
+  const initialPopulation = params.population.value
+  const growthRate = params.growthRate.value
+  const volatility = params.volatility.value
+  const enableRandomEvents = params.enableRandomEvents.value
+  const iterations = params.iterations.value
 
   // Initialize time series data
   const timeSeriesData: TimeSeriesPoint[] = []

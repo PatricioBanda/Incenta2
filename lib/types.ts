@@ -26,11 +26,20 @@ export interface Company {
   incentiveTypes: IncentiveType[]
 }
 
+export interface SimulationParameters {
+  population: { value: number }
+  growthRate: { value: number }
+  volatility: { value: number }
+  enableRandomEvents: { value: boolean }
+  iterations: { value: number }
+}
+
 export interface Scenario {
   id: string
   name: string
   createdAt: string
   companies: Company[]
+  parameters?: SimulationParameters
 }
 
 export interface TimeSeriesPoint {

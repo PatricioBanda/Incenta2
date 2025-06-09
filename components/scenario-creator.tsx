@@ -9,7 +9,14 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { CompanyForm } from "@/components/company-form"
-import { type Scenario, type Company, CompanySize, Territory, IncentiveType } from "@/lib/types"
+import {
+  type Scenario,
+  type Company,
+  CompanySize,
+  Territory,
+  IncentiveType,
+} from "@/lib/types"
+import { DEFAULT_PARAMETERS } from "@/lib/simulation-engine"
 
 interface ScenarioCreatorProps {
   onAddScenario: (scenario: Scenario) => void
@@ -29,6 +36,7 @@ const scenarioTemplates = [
         incentiveTypes: [IncentiveType.IDI],
       },
     ],
+    parameters: DEFAULT_PARAMETERS,
   },
   {
     name: "Multiple SMEs",
@@ -58,6 +66,7 @@ const scenarioTemplates = [
         incentiveTypes: [IncentiveType.IDT, IncentiveType.IP],
       },
     ],
+    parameters: DEFAULT_PARAMETERS,
   },
 ]
 
@@ -118,6 +127,7 @@ export function ScenarioCreator({ onAddScenario }: ScenarioCreatorProps) {
       name,
       createdAt: new Date().toISOString(),
       companies,
+      parameters: DEFAULT_PARAMETERS,
     }
 
     onAddScenario(newScenario)
